@@ -11,7 +11,7 @@ const sanitizeCredentials = (req, res, next) => {
       const phoneNumber = parsePhoneNumber(`+${req.body.id.replace(/\D/g, '')}`);
 
       if (phoneNumber?.number) {
-        req.body.id = phoneNumber.number;
+        req.body.id = phoneNumber.countryCallingCode + phoneNumber.nationalNumber;
         return next();
       } else {
         throw createHttpError.UnprocessableEntity(errorMessagesConstants.Auth.NoPhoneNumberOrEmail);

@@ -9,6 +9,9 @@ const constants = {
     AccessDenied: 'You are not allowed to access this data or perform this action',
     NotFound: 'User not found',
   },
+  File: {
+    NoFile: 'No file provided',
+  },
 };
 
 export default constants;
