@@ -9,6 +9,7 @@ import consola from 'consola';
 // importing other stuff
 import { connectToDatabase } from './utils/db';
 import { corsConfig } from './config';
+import { errorLogger, errorHandler, invalidPathHandler } from './middlewares';
 import indexRouter from './routes';
 
 async function start() {
@@ -21,6 +22,9 @@ async function start() {
   app.use(bodyParser.json());
   app.use(bodyParser.urlencoded({ extended: false }));
   app.use('/', indexRouter);
+  app.use(invalidPathHandler);
+  app.use(errorLogger);
+  app.use(errorHandler);
 
   const PORT = +process.env.PORT || 3000;
 
