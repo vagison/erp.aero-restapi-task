@@ -13,5 +13,6 @@ const storage = multer({
 });
 
 fileRouter.post('/upload', jwtMiddleware, storage.single('file'), fileController.upload);
+fileRouter.get('/list', jwtMiddleware, fileController.list);
 
 export default fileRouter;

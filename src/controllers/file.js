@@ -7,8 +7,9 @@ import moment from 'moment';
 
 import { errorMessagesConstants } from '../constants';
 import { FileModel } from '../models';
+import { paginate, generatePaginatedRes } from '../utils/pagination';
 
-async function createFolder(folderName) {
+async function createFolderForUser(folderName) {
   const uploadsPath = path.join(__dirname, '../../', 'uploads');
   const newFolderPath = path.join(uploadsPath, folderName);
 
@@ -20,20 +21,20 @@ async function createFolder(folderName) {
       await fs.mkdir(uploadsPath);
     }
 
-    // Check if the new folder already exists
+    // Check if the user folder already exists
     try {
       await fs.access(newFolderPath);
-      console.log(`Folder "${folderName}" already exists.`);
+      console.log(`User folder "${folderName}" already exists.`);
     } catch {
       await fs.mkdir(newFolderPath);
-      console.log(`Folder "${folderName}" created successfully.`);
+      console.log(`User folder "${folderName}" created successfully.`);
     }
 
-    // Return the path of the new folder
+    // Return the path of the user folder
     return newFolderPath;
   } catch (error) {
     console.error(`Error creating folder: ${error.message}`);
-    throw error; // Propagate the error up
+    throw error;
   }
 }
 
@@ -60,7 +61,7 @@ const upload = async (req, res, next) => {
     };
 
     // Get the path for the user's folder
-    const userFolderPath = await createFolder(fileData.userId);
+    const userFolderPath = await createFolderForUser(fileData.userId);
 
     // Construct the destination path for the file
     const destinationPath = path.join(userFolderPath, fileData.id);
@@ -77,6 +78,31 @@ const upload = async (req, res, next) => {
   }
 };
 
+const list = async (req, res, next) => {
+  const pagination = paginate({
+    query: {
+      page: +req.query.page,
+      limit: +req.query.list_size,
+    },
+  });
+
+  const fileList = await FileModel.list({
+    userId: req.user.id,
+    pagination,
+  });
+
+  const total = await FileModel.userFilesCount(req.user.id);
+
+  const result = generatePaginatedRes(fileList, {
+    total,
+    page: pagination.page,
+    limit: pagination.limit,
+  });
+
+  return res.status(200).json(result);
+};
+
 export {
   upload,
+  list,
 };

@@ -7,6 +7,15 @@ const createFile = (data) => `
 
 const findFileById = (id) => `SELECT * FROM ${TABLE} WHERE id = '${id}' LIMIT 1`;
 
-const findUserFiles = (userId) => `SELECT * FROM ${TABLE} WHERE user_id = '${userId}' LIMIT 1`;
+const findUserFiles = (data, page = 1, pageSize = 10) => `
+    SELECT * FROM ${TABLE} 
+    WHERE user_id = '${data.userId}' 
+    ORDER BY date_uploaded DESC
+    LIMIT ${data.pagination.limit} OFFSET ${data.pagination.offset}
+`;
 
-export { createFile, findFileById, findUserFiles };
+const countUserFiles = (userId) => `SELECT COUNT(*) AS count FROM ${TABLE} WHERE user_id = '${userId}';`;
+
+export {
+  createFile, findFileById, findUserFiles, countUserFiles,
+};
