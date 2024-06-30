@@ -79,27 +79,31 @@ const upload = async (req, res, next) => {
 };
 
 const list = async (req, res, next) => {
-  const pagination = paginate({
-    query: {
-      page: +req.query.page,
-      limit: +req.query.list_size,
-    },
-  });
+  try {
+    const pagination = paginate({
+      query: {
+        page: +req.query.page,
+        limit: +req.query.list_size,
+      },
+    });
 
-  const fileList = await FileModel.list({
-    userId: req.user.id,
-    pagination,
-  });
+    const fileList = await FileModel.list({
+      userId: req.user.id,
+      pagination,
+    });
 
-  const total = await FileModel.userFilesCount(req.user.id);
+    const total = await FileModel.userFilesCount(req.user.id);
 
-  const result = generatePaginatedRes(fileList, {
-    total,
-    page: pagination.page,
-    limit: pagination.limit,
-  });
+    const result = generatePaginatedRes(fileList, {
+      total,
+      page: pagination.page,
+      limit: pagination.limit,
+    });
 
-  return res.status(200).json(result);
+    return res.status(200).json(result);
+  } catch (error) {
+    next(error);
+  }
 };
 
 export {
