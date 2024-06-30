@@ -7,10 +7,12 @@ import http from 'http';
 import consola from 'consola';
 
 // importing other stuff
+import { connectToDatabase } from './utils/db';
 import { corsConfig } from './config';
 import indexRouter from './routes';
 
 async function start() {
+  await connectToDatabase();
   const app = express();
   const server = http.createServer(app);
   app.enable('trust proxy');
