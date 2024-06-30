@@ -72,7 +72,7 @@ const upload = async (req, res, next) => {
     // Create a record for the file in DB
     const dbRecord = await FileModel.create(fileData);
 
-    return res.json({ message: 'File uploaded successfully', file: dbRecord });
+    return res.status(201).json({ message: 'File uploaded successfully', file: dbRecord });
   } catch (error) {
     next(error);
   }
@@ -106,7 +106,25 @@ const list = async (req, res, next) => {
   }
 };
 
+const fileInfo = async (req, res, next) => {
+  try {
+    const info = await FileModel.info({
+      userId: req.user.id,
+      id: req.params.id,
+    });
+
+    if (!info) {
+      throw createHttpError.NotFound(errorMessagesConstants.File.FileNotFound);
+    }
+
+    return res.status(200).json({ info });
+  } catch (error) {
+    next(error);
+  }
+};
+
 export {
   upload,
   list,
+  fileInfo,
 };

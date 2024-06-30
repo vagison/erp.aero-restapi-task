@@ -5,9 +5,9 @@ const createFile = (data) => `
     VALUES ('${data.id}', '${data.userId}', '${data.name}', '${data.extension}', '${data.mimeType}', '${data.size}', '${data.dateUploaded}');
 `;
 
-const findFileById = (id) => `SELECT * FROM ${TABLE} WHERE id = '${id}' LIMIT 1`;
+const findFileById = (data) => `SELECT * FROM ${TABLE} WHERE user_id = '${data.userId}' AND id = '${data.id}' LIMIT 1`;
 
-const findUserFiles = (data, page = 1, pageSize = 10) => `
+const findUserFiles = (data) => `
     SELECT * FROM ${TABLE} 
     WHERE user_id = '${data.userId}' 
     ORDER BY date_uploaded DESC

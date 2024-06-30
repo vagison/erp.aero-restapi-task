@@ -3,13 +3,6 @@ import {
   countUserFiles, createFile, findFileById, findUserFiles,
 } from '../queries/file';
 
-async function get(id) {
-  const [response] = await db().execute(findFileById(id));
-  const user = response[0];
-
-  return user;
-}
-
 async function create(fileData) {
   await db().execute(createFile(fileData));
 
@@ -23,6 +16,13 @@ async function list(data) {
   return list;
 }
 
+async function info(data) {
+  const [response] = await db().execute(findFileById(data));
+  const file = response[0];
+
+  return file;
+}
+
 async function userFilesCount(userId) {
   const [response] = await db().execute(countUserFiles(userId));
 
@@ -30,5 +30,5 @@ async function userFilesCount(userId) {
 }
 
 export {
-  get, create, list, userFilesCount,
+  info, create, list, userFilesCount,
 };
