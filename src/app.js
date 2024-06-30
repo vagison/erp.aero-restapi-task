@@ -9,6 +9,8 @@ import consola from 'consola';
 // importing other stuff
 import { connectToDatabase } from './utils/db';
 import { corsConfig } from './config';
+import cookieParser from './middlewares/auth/cookie';
+import './config/passport';
 import { errorLogger, errorHandler, invalidPathHandler } from './middlewares';
 import indexRouter from './routes';
 
@@ -20,6 +22,7 @@ async function start() {
   app.use(morgan('[:date[iso]] - :remote-addr - :user-agent - :method - :url - :status - :response-time ms'));
   app.use(cors(corsConfig));
   app.use(bodyParser.json());
+  app.use(cookieParser());
   app.use(bodyParser.urlencoded({ extended: false }));
   app.use('/', indexRouter);
   app.use(invalidPathHandler);

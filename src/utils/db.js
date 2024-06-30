@@ -26,4 +26,4 @@ const db = () => {
 };
 
 export default db;
-export { connectToDatabase, db };
+export { connectToDatabase };
