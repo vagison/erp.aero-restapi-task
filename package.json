@@ -1,0 +1,32 @@
+{
+  "name": "erp.aero-restapi-task",
+  "version": "1.0.0",
+  "description": "Node.js technical task for ERP.aero",
+  "main": "app.js",
+  "engines": {
+    "node": "20.X"
+  },
+  "scripts": {
+    "start": "node dist/app.js",
+    "dev": "nodemon --exec babel-node ./src/app.js",
+    "build": "npm run clean && babel ./src --out-dir dist --copy-files",
+    "clean": "rm -rf dist",
+    "lint": "eslint"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/cli": "^7.12.10",
+    "@babel/core": "^7.12.10",
+    "@babel/node": "^7.12.10",
+    "@babel/preset-env": "^7.12.10",
+    "babel-plugin-module-resolver": "^5.0.0",
+    "eslint": "^8.26.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.26.0",
+    "nodemon": "^3.1.2"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5"
+  }
+}
