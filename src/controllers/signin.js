@@ -57,6 +57,9 @@ const newBearerToken = async (req, res, next) => {
     // Create a bearerToken
     const bearerToken = generateJWT({ id: refreshTokenInDb.user });
 
+    // Mark all previous bearerTokens inactive for given refreshToken
+    await BearerTokenModel.markTokensInactive(refreshToken);
+
     // Store a connection between both token types
     await BearerTokenModel.create(bearerToken, refreshToken);
 
