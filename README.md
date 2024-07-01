@@ -2,7 +2,7 @@ This file describes the installation process of the Node.js technical task for E
 ========================================================================================
 
 ## Pre-installation Setup
-1. You need to have Node runtime version 20.x or higher. Please navigate to nodejs.org and download an appropriate version.
+1. You need to have Node runtime version 20.x or higher. Please navigate to https://nodejs.org and download an appropriate version.
 2. Create a MySQL server instance to serve as the database. In the .env file, assign the variables listed in .env.dist with your credentials.
 
 ## Installation
