@@ -25,7 +25,7 @@ const signin = async (req, res, next) => {
     // Create a bearerToken
     const bearerToken = generateJWT(user);
 
-    // Create a connection between both token types
+    // Store a connection between both token types
     await BearerTokenModel.create(bearerToken, refreshToken);
 
     setAuthResponse(
@@ -54,7 +54,11 @@ const newBearerToken = async (req, res, next) => {
       throw createHttpError.BadRequest(errorMessagesConstants.Auth.InvalidRefreshToken);
     }
 
+    // Create a bearerToken
     const bearerToken = generateJWT({ id: refreshTokenInDb.user });
+
+    // Store a connection between both token types
+    await BearerTokenModel.create(bearerToken, refreshToken);
 
     setAuthResponse(
       res,
