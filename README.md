@@ -7,20 +7,31 @@ This file describes the installation process of the Node.js technical task for E
 
 ## Installation
 To install the API, follow these steps:
-1. Clone the repository: ```git clone git@github.com:vagison/erp.aero-restapi-task.git```
-2. Navigate to the project directory: ```cd erp.aero-restapi-task```
-3. Install the dependencies: ```npm i```
+1. Clone the repository:
+
+    ```git clone git@github.com:vagison/erp.aero-restapi-task.git```
+
+2. Navigate to the project directory:
+
+    ```cd erp.aero-restapi-task```
+
+3. Install the dependencies:
+
+    ```npm i```
 
 ## Running
 To run the API, follow these steps:
 1. To start the compiled application located in the dist directory using Node you have to run the following commands:
 
-    ```npm run build```
-   
-    ```npm start```
+    ```npm run build``` and ```npm start```
 
-3. Alternatively to run the app in development mode with nodemon you have to run the following command: ```npm run dev```
-4. To clean the dist directory, you can use the following command: ```npm run clean```
+3. Alternatively to run the app in development mode with nodemon you have to run the following command:
+
+    ```npm run dev```
+   
+5. To clean the dist directory, you can use the following command: 
+
+    ```npm run clean```
 
 ## Environment Configuration
 Create a .env file in the root of the project and configure the environment variables listed in .env.dist:
