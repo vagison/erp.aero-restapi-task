@@ -39,10 +39,11 @@ The folder structure of the project is self explanatory. Here's a brief introduc
 
 There are some files in the root directory apart from app.js:
 -------------------------------------------------------------
-* package.json - includes a list of the packages and their versions used for this project.
-* .gitignore - used to exclude files from being pushed to the repository.
-* .eslintrc.json - contains configuration settings for ESLint, which is used to identify and fix problems in JavaScript code.
+* .babelrc.json - contains configuration settings for Babel, a JavaScript compiler that converts ES6+ code into a backward-compatible version of JavaScript that can run in older environments.
 * .env.dist - serves as a template for environment variables, providing a sample configuration for the .env file.
+* .eslintrc.json - contains configuration settings for ESLint, which is used to identify and fix problems in JavaScript code.
+* .gitignore - used to exclude files from being pushed to the repository.
+* package.json - includes a list of the packages and their versions used for this project.
 
 Server-side entities
 ---------------------
