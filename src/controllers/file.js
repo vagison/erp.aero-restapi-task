@@ -5,6 +5,7 @@ import moment from 'moment';
 import { v4 as uuid } from 'uuid';
 import { fromBuffer } from 'file-type';
 
+import consola from 'consola';
 import { errorMessagesConstants, responseMessagesConstants } from '../constants';
 import { FileModel } from '../models';
 import { paginate, generatePaginatedRes } from '../utils/pagination';
@@ -14,29 +15,23 @@ const createUserFolder = async (folderName) => {
   const uploadsPath = path.join(__dirname, '../../../', 'uploads');
   const newFolderPath = path.join(uploadsPath, folderName);
 
+  // Check if the uploads directory exists, if not create it
   try {
-    // Check if the uploads directory exists, if not create it
-    try {
-      await fs.access(uploadsPath);
-    } catch {
-      await fs.mkdir(uploadsPath);
-    }
-
-    // Check if the user folder already exists
-    try {
-      await fs.access(newFolderPath);
-      console.log(`User folder "${folderName}" already exists.`);
-    } catch {
-      await fs.mkdir(newFolderPath);
-      console.log(`User folder "${folderName}" created successfully.`);
-    }
-
-    // Return the path of the user folder
-    return newFolderPath;
-  } catch (error) {
-    console.error(`Error creating folder: ${error.message}`);
-    throw error;
+    await fs.access(uploadsPath);
+  } catch {
+    await fs.mkdir(uploadsPath);
   }
+
+  // Check if the user folder already exists
+  try {
+    await fs.access(newFolderPath);
+    consola.info({ message: `User folder "${folderName}" already exists.`, badge: true });
+  } catch {
+    await fs.mkdir(newFolderPath);
+    consola.info({ message: `User folder "${folderName}" created successfully.`, badge: true });
+  }
+
+  return newFolderPath;
 };
 
 const getFilePath = async (info) => {
@@ -73,7 +68,7 @@ const placeFile = async (req, replacement = false) => {
     dateUploaded: moment(Date.now()).format('YYYY-MM-DD HH:mm:ss'),
   };
 
-  // Updating existing file
+  // Update existing file
   if (replacement) {
     // Extract existing file info from req
     const { fileInfo } = req;
@@ -93,7 +88,7 @@ const placeFile = async (req, replacement = false) => {
     await fs.rename(tmpDestinationPath, destinationPath);
   }
 
-  // Placing new file
+  // Place new file
   if (!replacement) {
     // Create a new id for the file
     fileData.id = uuid();
@@ -108,7 +103,7 @@ const placeFile = async (req, replacement = false) => {
     await FileModel.create(fileData);
   }
 
-  // Returning newely uploaded file data
+  // Return newely uploaded file data
   return fileData;
 };
 

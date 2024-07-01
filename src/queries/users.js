@@ -1,10 +1,17 @@
-const TABLE = 'users';
+const TABLE_NAME = 'users';
 
-const findById = (id) => `SELECT * FROM ${TABLE} WHERE id = '${id}' LIMIT 1`;
+const createTable = () => `
+  CREATE TABLE IF NOT EXISTS ${TABLE_NAME} (
+    id VARCHAR(255) NOT NULL PRIMARY KEY,
+    password VARCHAR(255) NOT NULL
+  );
+`;
+
+const findById = (id) => `SELECT * FROM ${TABLE_NAME} WHERE id = '${id}' LIMIT 1`;
 
 const createUser = (data) => `
-        INSERT INTO ${TABLE} (id, password, first_name, last_name)
-        VALUES ('${data.id}', '${data.password}', '${data.first_name}', '${data.last_name}');
-    `;
+  INSERT INTO ${TABLE_NAME} (id, password)
+  VALUES ('${data.id}', '${data.password}');
+`;
 
-export { findById, createUser };
+export { createTable, findById, createUser };

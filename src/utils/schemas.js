@@ -1,18 +1,19 @@
 import db from './db';
 import { findById } from '../queries/users';
+import { errorMessagesConstants } from '../constants';
 
 const signupValidatorSchema = {
   id: {
     exists: true,
     trim: true,
-    errorMessage: 'Phone number or email is required',
+    errorMessage: errorMessagesConstants.Auth.PhoneNumberOrEmailRequired,
     custom: {
       options: async (id) => {
         const results = (await db().execute(findById(id)))[0];
         const user = results[0];
 
         if (user) {
-          return Promise.reject(new Error('User with this phone number or email already exists'));
+          return Promise.reject(new Error(errorMessagesConstants.Auth.ExistingUser));
         }
 
         return '';
@@ -22,25 +23,13 @@ const signupValidatorSchema = {
   password: {
     exists: true,
     trim: true,
-    errorMessage: 'Password is required',
+    errorMessage: errorMessagesConstants.Auth.PasswordRequired,
     isLength: {
       options: {
         min: 6,
       },
-      errorMessage: 'Password should be at least 6 chars long',
+      errorMessage: errorMessagesConstants.Auth.InvalidPasswordLength,
     },
-  },
-  first_name: {
-    exists: {
-      errorMessage: 'First name is required',
-    },
-    trim: true,
-  },
-  last_name: {
-    exists: {
-      errorMessage: 'Last name is required',
-    },
-    trim: true,
   },
 };
 
@@ -48,17 +37,17 @@ const signinValidationSchema = {
   id: {
     exists: true,
     trim: true,
-    errorMessage: 'Phone number or email is required',
+    errorMessage: errorMessagesConstants.Auth.PhoneNumberOrEmailRequired,
   },
   password: {
     exists: true,
     trim: true,
-    errorMessage: 'Password is required',
+    errorMessage: errorMessagesConstants.Auth.PasswordRequired,
     isLength: {
       options: {
         min: 1,
       },
-      errorMessage: 'Password is required',
+      errorMessage: errorMessagesConstants.Auth.PasswordRequired,
     },
   },
 };

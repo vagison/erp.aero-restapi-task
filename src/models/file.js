@@ -1,6 +1,6 @@
 import db from '../utils/db';
 import {
-  countUserFiles, createFile, findFileById, findUserFiles, removeFile,
+  countUserFiles, createFile, findFile, findUserFiles, removeFile,
   updateFile,
 } from '../queries/file';
 
@@ -36,7 +36,7 @@ async function list(data) {
 }
 
 async function info(data) {
-  const [response] = await db().execute(findFileById(data));
+  const [response] = await db().execute(findFile(data));
   const info = response[0];
 
   return processFileInfo(info);
