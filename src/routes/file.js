@@ -3,6 +3,7 @@ import multer from 'multer';
 
 import { fileController } from '../controllers';
 import { jwtMiddleware } from '../middlewares';
+import { fileExistance } from '../middlewares/file';
 
 const fileRouter = express.Router();
 
@@ -12,8 +13,11 @@ const storage = multer({
   },
 });
 
-fileRouter.post('/upload', jwtMiddleware, storage.single('file'), fileController.upload);
+fileRouter.post('/upload', jwtMiddleware, fileExistance, storage.single('file'), fileController.upload);
 fileRouter.get('/list', jwtMiddleware, fileController.list);
-fileRouter.get('/:id', jwtMiddleware, fileController.fileInfo);
+fileRouter.get('/:id', jwtMiddleware, fileExistance, fileController.fileInfo);
+fileRouter.delete('/:id', jwtMiddleware, fileExistance, fileController.remove);
+fileRouter.get('/download/:id', jwtMiddleware, fileExistance, fileController.download);
+fileRouter.put('/update/:id', jwtMiddleware, fileExistance, storage.single('file'), fileController.upload);
 
 export default fileRouter;
