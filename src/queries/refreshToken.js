@@ -18,7 +18,7 @@ const findTokenByUserId = (userId) => `SELECT * FROM ${TABLE_NAME} WHERE user = 
 
 const createToken = (data) => `
   INSERT INTO ${TABLE_NAME} (id, user, active, create_date)
-  VALUES ('${data.id}', '${data.user}', ${data.active}, '${data.createDate}');
+  VALUES ('${data.id}', '${data.user}', 1, '${data.createDate}');
 `;
 
 const markTokenInactive = (id) => `UPDATE ${TABLE_NAME} SET active = 0 WHERE id = '${id}';`;

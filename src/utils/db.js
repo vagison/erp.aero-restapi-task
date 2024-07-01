@@ -16,6 +16,7 @@ const initializeDb = async (db) => {
   const query = `
     ${tableQueries.userQueries.createTable()}
     ${tableQueries.refreshTokenQueries.createTable()}
+    ${tableQueries.bearerTokenQueries.createTable()}
     ${tableQueries.fileQueries.createTable()}
   `;
 

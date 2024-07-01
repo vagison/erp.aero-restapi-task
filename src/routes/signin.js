@@ -10,8 +10,5 @@ const signinRouter = express.Router();
 
 signinRouter.post('/', sanitizeCredentials, requestValidator(signinValidationSchema), signinController.signin);
 signinRouter.post('/new_token', signinController.newBearerToken);
-// authRouter.post('/logout', jwtMiddleware, authController.logout);
-// authRouter.post('/refreshToken', authController.refreshToken);
-// authRouter.get('/me', jwtMiddleware, authController.me);
 
 export default signinRouter;

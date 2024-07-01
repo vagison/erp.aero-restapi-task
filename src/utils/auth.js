@@ -1,15 +1,11 @@
 import jwt from 'jsonwebtoken';
 import { jwtConfig, refreshTokenConfig } from '../config';
 
-const generateJWT = (user) => {
-  const { id } = user;
-
-  return jwt.sign(
-    { id },
-    jwtConfig.secret,
-    { expiresIn: jwtConfig.expiresIn },
-  );
-};
+const generateJWT = (user) => jwt.sign(
+  user,
+  jwtConfig.secret,
+  { expiresIn: jwtConfig.expiresIn },
+);
 
 const setAuthResponse = (res, bearerToken, refreshToken) => {
   res.cookie(refreshTokenConfig.key, refreshToken, {

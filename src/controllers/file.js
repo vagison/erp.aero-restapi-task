@@ -192,7 +192,7 @@ const download = async (req, res, next) => {
     // Extract file info from req
     const { fileInfo } = req;
 
-    // Getting file path and send the file
+    // Get file path and send the file
     const filePath = await getFilePath(fileInfo);
 
     if (filePath) {

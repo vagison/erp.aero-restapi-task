@@ -11,16 +11,16 @@ async function find(id) {
 }
 
 async function create(data) {
-  const hashedPassword = await bcryptjs.hash(data.password, 10); // Hash password
+  const hashedPassword = await bcryptjs.hash(data.password, 10);
   const userData = {
     ...data,
     password: hashedPassword,
   };
 
-  // Creating the user
+  // Create the user
   await db().execute(createUser(userData));
 
-  // Getting the user
+  // Get the user from DB
   const user = await find(data.id);
 
   return user;

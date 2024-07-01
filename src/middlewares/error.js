@@ -11,7 +11,6 @@ function errorHandler(error, req, res, _) {
   let statusCode = error.status || 500;
   let message = error.message || 'Something went wrong';
 
-  // TODO: improve
   if (error.name === 'ValidationError') {
     statusCode = 400;
     message = 'BadRequest';

@@ -2,8 +2,7 @@ import passport from 'passport';
 import { Strategy as JWTStrategy, ExtractJwt } from 'passport-jwt';
 
 import { jwtConfig } from '.';
-import db from '../utils/db';
-import { findById } from '../queries/users';
+import { UserModel } from '../models';
 
 passport.use(
   new JWTStrategy(
@@ -13,8 +12,8 @@ passport.use(
     },
     async (token, done) => {
       try {
-        const results = (await db().execute(findById(token.id)))[0];
-        const user = results[0];
+        const userInDB = await UserModel.find(token.id);
+        const user = { id: userInDB.id };
 
         if (user) {
           return done(null, user);

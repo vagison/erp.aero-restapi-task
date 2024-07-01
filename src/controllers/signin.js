@@ -1,7 +1,7 @@
-import createError from 'http-errors';
+import createHttpError from 'http-errors';
 
 import { generateJWT, setAuthResponse } from '../utils/auth';
-import { RefreshTokenModel, UserModel } from '../models';
+import { BearerTokenModel, RefreshTokenModel, UserModel } from '../models';
 import { errorMessagesConstants } from '../constants';
 
 const signin = async (req, res, next) => {
@@ -10,18 +10,23 @@ const signin = async (req, res, next) => {
     const user = await UserModel.find(id);
 
     if (!user) {
-      throw createError.NotFound(errorMessagesConstants.User.NotFound);
+      throw createHttpError.NotFound(errorMessagesConstants.User.NotFound);
     }
 
     if (!(await UserModel.isValidPassword(password, user.password))) {
-      throw createError.Unauthorized(errorMessagesConstants.User.InvalidPassword);
+      throw createHttpError.Unauthorized(errorMessagesConstants.User.InvalidPassword);
     }
 
-    // Create or update the refreshToken
+    delete user.password;
+
+    // Create a refreshToken
     const refreshToken = await RefreshTokenModel.create(user);
 
     // Create a bearerToken
     const bearerToken = generateJWT(user);
+
+    // Create a connection between both token types
+    await BearerTokenModel.create(bearerToken, refreshToken);
 
     setAuthResponse(
       res,
@@ -40,10 +45,14 @@ const newBearerToken = async (req, res, next) => {
     const { refreshToken } = req.cookies;
 
     if (!refreshToken) {
-      throw createError.BadRequest(errorMessagesConstants.Auth.RefreshTokenRequired);
+      throw createHttpError.BadRequest(errorMessagesConstants.Auth.InvalidRefreshToken);
     }
 
     const refreshTokenInDb = await RefreshTokenModel.isTokenValid(refreshToken);
+
+    if (!refreshTokenInDb) {
+      throw createHttpError.BadRequest(errorMessagesConstants.Auth.InvalidRefreshToken);
+    }
 
     const bearerToken = generateJWT({ id: refreshTokenInDb.user });
 

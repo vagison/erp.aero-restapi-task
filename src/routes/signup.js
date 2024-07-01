@@ -9,6 +9,5 @@ import { sanitizeCredentials } from '../middlewares/auth/sanitize';
 const signupRouter = express.Router();
 
 signupRouter.post('/', sanitizeCredentials, requestValidator(signupValidatorSchema), signupController.signup);
-// authRouter.get('/me', jwtMiddleware, authController.me);
 
 export default signupRouter;

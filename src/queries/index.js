@@ -1,7 +1,8 @@
 import * as userQueries from './users';
-import * as fileQueries from './file';
 import * as refreshTokenQueries from './refreshToken';
+import * as bearerTokenQueries from './bearerToken';
+import * as fileQueries from './file';
 
 export {
-  userQueries, fileQueries, refreshTokenQueries,
+  userQueries, refreshTokenQueries, bearerTokenQueries, fileQueries,
 };

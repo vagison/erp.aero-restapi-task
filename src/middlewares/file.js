@@ -2,7 +2,7 @@ import createHttpError from 'http-errors';
 import { FileModel } from '../models';
 import { errorMessagesConstants } from '../constants';
 
-async function fileExistance(req, res, next) {
+async function fileExistence(req, res, next) {
   try {
     if (req.url !== '/upload') {
       const info = await FileModel.info({
@@ -26,4 +26,4 @@ async function fileExistance(req, res, next) {
   }
 }
 
-export { fileExistance };
+export { fileExistence };

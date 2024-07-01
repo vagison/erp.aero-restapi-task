@@ -1,15 +1,13 @@
 import moment from 'moment';
 import { v4 as uuid } from 'uuid';
-import createHttpError from 'http-errors';
 
 import db from '../utils/db';
 import {
   createToken,
   findTokenById,
-  findTokenByUserId,
   markTokenInactive,
 } from '../queries/refreshToken';
-import { errorMessagesConstants, timeConstants } from '../constants';
+import { timeConstants } from '../constants';
 
 function processToken(token) {
   if (!token) return;
@@ -28,18 +26,10 @@ async function findById(id) {
   return processToken(token);
 }
 
-// async function findByUserId(userId) {
-//   const [response] = await db().execute(findTokenByUserId(userId));
-//   const token = response[0];
-
-//   return processToken(token);
-// }
-
 async function create(user) {
   const refreshTokenData = {
     id: uuid(),
     user: user.id,
-    active: true,
     createDate: moment(Date.now()).format('YYYY-MM-DD HH:mm:ss'),
   };
 
@@ -57,7 +47,7 @@ async function isTokenValid(id) {
   const expired = (moment(token.createDate, 'YYYY-MM-DD HH:mm:ss').add(timeConstants.twoWeeks)).isBefore(moment());
 
   if (!token || !token.active || expired) {
-    throw createHttpError.BadRequest(errorMessagesConstants.Auth.InvalidRefreshToken);
+    return false;
   }
 
   return token;
