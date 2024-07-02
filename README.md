@@ -42,11 +42,13 @@ app.js is the entry point of the app. It starts the server, initiates the the da
 The folder structure of the project is self explanatory. Here's a brief introduction to it:
 -------------------------------------------------------------------------------------------
 * Config: Contains all configurations required for database connection, CORS, JWT and other settings.
+* Constants: Contains predefined values for error and success messages, as well as other constants.
 * Controllers: Houses the actual implementations of server-side functions.
 * Middleware: Includes functions meant to be executed when Routes attempt to access Controllers. This also contains error-handling logic, cookie parser, Express validators and more.
 * Models: Defines the schemas for server-side entities.
-* Routes: Represents server-side endpoints that expect calls from the client-side. Routes redirect these calls to Controllers.
-* Util: Serves as a folder to store helper functions, validator schemas, database initializing logic and more.
+* Queries: Provides functions to retrieve and manipulate data within the database, utilized by models to perform data operations.
+* Routes: Represents server-side endpoints that expect calls from the client-side. Routes redirect these calls to Controllers through Middlewares.
+* Utils: Serves as a folder to store helper functions, validator schemas, database initializing logic and more.
 
 There are some files in the root directory apart from the src folder:
 ---------------------------------------------------------------------
@@ -55,6 +57,7 @@ There are some files in the root directory apart from the src folder:
 * .eslintrc.json - contains configuration settings for ESLint, which is used to identify and fix problems in JavaScript code.
 * .gitignore - used to exclude files from being pushed to the repository.
 * package.json - includes a list of the packages and their versions used for this project.
+* package-lock.json - records the exact versions of packages and their dependencies that were installed, ensuring consistent installs across different environments.
 
 Server-side entities
 ---------------------
