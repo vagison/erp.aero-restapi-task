@@ -1,4 +1,8 @@
 const constants = {
+  Database: {
+    NotConnected: 'Database not connected!',
+    ConnectionError: 'DB connection error:',
+  },
   Auth: {
     NoPhoneNumberOrEmail: 'Please enter a correct phone number (in international format) or an email',
     PhoneNumberOrEmailRequired: 'Phone number or email is required',

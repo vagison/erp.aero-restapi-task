@@ -3,11 +3,12 @@ import consola from 'consola';
 
 import { dbConfig } from '../config';
 import * as tableQueries from '../queries';
+import { errorMessagesConstants, logMessagesConstants } from '../constants';
 
 let pool;
 
 const db = () => {
-  if (!pool) throw new Error('Database not connected!');
+  if (!pool) throw new Error(errorMessagesConstants.Database.NotConnected);
 
   return pool;
 };
@@ -28,12 +29,12 @@ const connectToDatabase = async () => {
     if (!pool) {
       pool = await mysql2.createConnection(dbConfig);
       await initializeDb(pool);
-      consola.success({ message: 'DB connection established', badge: true });
+      consola.success({ message: logMessagesConstants.Database.ConnectionEstablished, badge: true });
     } else {
-      consola.warn({ message: 'DB connection already established', badge: true });
+      consola.warn({ message: logMessagesConstants.Database.ConnectionAlreadyEstablished, badge: true });
     }
   } catch (error) {
-    consola.error({ message: `DB connection error: "${error}"`, badge: true });
+    consola.error({ message: `${errorMessagesConstants.Database.ConnectionError} "${error}"`, badge: true });
     process.exit();
   }
 };
