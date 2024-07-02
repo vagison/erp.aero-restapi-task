@@ -48,8 +48,8 @@ The folder structure of the project is self explanatory. Here's a brief introduc
 * Routes: Represents server-side endpoints that expect calls from the client-side. Routes redirect these calls to Controllers.
 * Util: Serves as a folder to store helper functions, validator schemas, database initializing logic and more.
 
-There are some files in the root directory apart src folder:
-------------------------------------------------------------
+There are some files in the root directory apart from the src folder:
+---------------------------------------------------------------------
 * .babelrc.json - contains configuration settings for Babel, a JavaScript compiler that converts ES6+ code into a backward-compatible version of JavaScript that can run in older environments.
 * .env.dist - serves as a template for environment variables, providing a sample configuration for the .env file.
 * .eslintrc.json - contains configuration settings for ESLint, which is used to identify and fix problems in JavaScript code.
