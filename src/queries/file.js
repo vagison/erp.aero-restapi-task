@@ -40,5 +40,11 @@ const updateFile = (data) => `
 `;
 
 export {
-  createTable, createFile, findFile, findUserFiles, countUserFiles, removeFile, updateFile,
+  createTable,
+  createFile,
+  findFile,
+  findUserFiles,
+  countUserFiles,
+  removeFile,
+  updateFile,
 };

@@ -4,8 +4,8 @@ import createHttpError from 'http-errors';
 import moment from 'moment';
 import { v4 as uuid } from 'uuid';
 import { fromBuffer } from 'file-type';
-
 import consola from 'consola';
+
 import { errorMessagesConstants, responseMessagesConstants } from '../constants';
 import { FileModel } from '../models';
 import { paginate, generatePaginatedRes } from '../utils/pagination';
@@ -42,7 +42,7 @@ const getFilePath = async (info) => {
   }
 
   // If no file exists in the storage - throw an error
-  throw createHttpError.NotFound(errorMessagesConstants.File.FileNotFound);
+  throw createHttpError.NotFound(errorMessagesConstants.File.NotFound);
 };
 
 const placeFile = async (req, replacement = false) => {
@@ -201,7 +201,7 @@ const download = async (req, res, next) => {
     }
 
     // If file doesn't exist in the storage - throw an error
-    throw createHttpError.NotFound(errorMessagesConstants.File.FileNotFound);
+    throw createHttpError.NotFound(errorMessagesConstants.File.NotFound);
   } catch (error) {
     next(error);
   }

@@ -1,4 +1,5 @@
 import db from '../utils/db';
+
 import {
   findTokenById,
   createToken,
@@ -50,5 +51,8 @@ async function isTokenValid(id) {
 }
 
 export {
-  findById, create, markTokensInactive, isTokenValid,
+  findById,
+  create,
+  markTokensInactive,
+  isTokenValid,
 };

@@ -1,6 +1,7 @@
 import createHttpError from 'http-errors';
-import * as EmailValidator from 'email-validator';
 import parsePhoneNumber from 'libphonenumber-js';
+import * as EmailValidator from 'email-validator';
+
 import { errorMessagesConstants } from '../../constants';
 
 const sanitizeCredentials = (req, res, next) => {
@@ -22,4 +23,6 @@ const sanitizeCredentials = (req, res, next) => {
   }
 };
 
-export { sanitizeCredentials };
+export {
+  sanitizeCredentials,
+};

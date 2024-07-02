@@ -12,7 +12,7 @@ passport.use(
     },
     async (token, done) => {
       try {
-        const userInDB = await UserModel.find(token.id);
+        const userInDB = await UserModel.findById(token.id);
         const user = { id: userInDB.id };
 
         if (user) {

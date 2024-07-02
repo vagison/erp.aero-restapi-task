@@ -4,5 +4,8 @@ import * as BearerTokenModel from './bearerToken';
 import * as FileModel from './file';
 
 export {
-  UserModel, RefreshTokenModel, BearerTokenModel, FileModel,
+  UserModel,
+  RefreshTokenModel,
+  BearerTokenModel,
+  FileModel,
 };

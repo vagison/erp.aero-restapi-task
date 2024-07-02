@@ -4,5 +4,8 @@ import * as bearerTokenQueries from './bearerToken';
 import * as fileQueries from './file';
 
 export {
-  userQueries, refreshTokenQueries, bearerTokenQueries, fileQueries,
+  userQueries,
+  refreshTokenQueries,
+  bearerTokenQueries,
+  fileQueries,
 };

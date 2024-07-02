@@ -37,4 +37,8 @@ function invalidPathHandler(req, res) {
   return res.status(statusCode).json(response);
 }
 
-export { errorLogger, errorHandler, invalidPathHandler };
+export {
+  errorLogger,
+  errorHandler,
+  invalidPathHandler,
+};

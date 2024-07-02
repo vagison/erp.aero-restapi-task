@@ -1,5 +1,5 @@
-import { checkSchema, validationResult } from 'express-validator';
 import createError from 'http-errors';
+import { checkSchema, validationResult } from 'express-validator';
 
 export default function validate(schema) {
   return async (req, res, next) => {
@@ -14,7 +14,6 @@ export default function validate(schema) {
       return next(err);
     }
 
-    // continue
     return next();
   };
 }

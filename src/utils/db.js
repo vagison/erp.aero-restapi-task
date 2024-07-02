@@ -1,8 +1,8 @@
 import mysql2 from 'mysql2/promise';
 import consola from 'consola';
 
-import * as tableQueries from '../queries';
 import { dbConfig } from '../config';
+import * as tableQueries from '../queries';
 
 let pool;
 
@@ -39,4 +39,6 @@ const connectToDatabase = async () => {
 };
 
 export default db;
-export { connectToDatabase };
+export {
+  connectToDatabase,
+};

@@ -1,8 +1,8 @@
 import express from 'express';
 
-import { infoController } from '../controllers';
 import { jwtMiddleware } from '../middlewares';
 import { isBearerValid } from '../middlewares/auth/bearer';
+import { infoController } from '../controllers';
 
 const infoRouter = express.Router();
 

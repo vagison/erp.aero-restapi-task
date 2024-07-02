@@ -6,4 +6,6 @@ const temp = async (req, res, next) => {
   }
 };
 
-export { temp };
+export {
+  temp,
+};

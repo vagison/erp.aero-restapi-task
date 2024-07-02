@@ -1,6 +1,7 @@
 import createHttpError from 'http-errors';
-import { FileModel } from '../models';
+
 import { errorMessagesConstants } from '../constants';
+import { FileModel } from '../models';
 
 async function checkFileExistence(req, res, next) {
   try {
@@ -10,7 +11,7 @@ async function checkFileExistence(req, res, next) {
     });
 
     if (!info) {
-      throw createHttpError.NotFound(errorMessagesConstants.File.FileNotFound);
+      throw createHttpError.NotFound(errorMessagesConstants.File.NotFound);
     }
 
     // Forward file info to the next middleware/controller
@@ -31,4 +32,7 @@ function addUploadFlag(req, res, next) {
   }
 }
 
-export { checkFileExistence, addUploadFlag };
+export {
+  checkFileExistence,
+  addUploadFlag,
+};

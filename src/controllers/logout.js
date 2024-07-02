@@ -1,4 +1,5 @@
 import PrettyError from 'pretty-error';
+
 import { refreshTokenConfig } from '../config';
 import { responseMessagesConstants } from '../constants';
 import { BearerTokenModel, RefreshTokenModel } from '../models';

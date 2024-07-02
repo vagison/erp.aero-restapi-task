@@ -1,13 +1,13 @@
 import createHttpError from 'http-errors';
 
-import { generateJWT, setAuthResponse } from '../utils/auth';
-import { BearerTokenModel, RefreshTokenModel, UserModel } from '../models';
 import { errorMessagesConstants } from '../constants';
+import { BearerTokenModel, RefreshTokenModel, UserModel } from '../models';
+import { generateJWT, setAuthResponse } from '../utils/auth';
 
 const signin = async (req, res, next) => {
   try {
     const { id, password } = req.body;
-    const user = await UserModel.find(id);
+    const user = await UserModel.findById(id);
 
     if (!user) {
       throw createHttpError.NotFound(errorMessagesConstants.User.NotFound);
@@ -76,5 +76,6 @@ const newBearerToken = async (req, res, next) => {
 };
 
 export {
-  signin, newBearerToken,
+  signin,
+  newBearerToken,
 };

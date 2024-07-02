@@ -1,9 +1,11 @@
 import db from '../utils/db';
+
 import {
   countUserFiles, createFile, findFile, findUserFiles, removeFile,
   updateFile,
 } from '../queries/file';
 
+// Helpers
 function processFileInfo(info) {
   if (!info) {
     return;
@@ -22,6 +24,7 @@ function processFileInfo(info) {
   return processedInfo;
 }
 
+// Controllers
 async function create(fileData) {
   await db().execute(createFile(fileData));
 
@@ -61,5 +64,10 @@ async function update(fileData) {
 }
 
 export {
-  info, create, list, userFilesCount, remove, update,
+  info,
+  create,
+  list,
+  userFilesCount,
+  remove,
+  update,
 };

@@ -1,6 +1,7 @@
 import express from 'express';
-import { logoutController } from '../controllers';
+
 import { jwtMiddleware } from '../middlewares';
+import { logoutController } from '../controllers';
 
 const logoutRouter = express.Router();
 

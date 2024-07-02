@@ -1,10 +1,11 @@
 import express from 'express';
-import { signupController } from '../controllers';
+
+import { sanitizeCredentials } from '../middlewares/auth/sanitize';
 import { requestValidator } from '../middlewares';
 import {
   signupValidatorSchema,
 } from '../utils/schemas';
-import { sanitizeCredentials } from '../middlewares/auth/sanitize';
+import { signupController } from '../controllers';
 
 const signupRouter = express.Router();
 

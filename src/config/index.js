@@ -1,4 +1,5 @@
 import dotenv from 'dotenv';
+
 import { timeConstants } from '../constants';
 
 dotenv.config();
@@ -30,5 +31,8 @@ const refreshTokenConfig = {
 };
 
 export {
-  corsConfig, dbConfig, jwtConfig, refreshTokenConfig,
+  corsConfig,
+  dbConfig,
+  jwtConfig,
+  refreshTokenConfig,
 };

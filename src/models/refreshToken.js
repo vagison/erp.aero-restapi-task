@@ -1,13 +1,13 @@
 import moment from 'moment';
 import { v4 as uuid } from 'uuid';
 
+import { timeConstants } from '../constants';
 import db from '../utils/db';
 import {
   createToken,
   findTokenById,
   markTokenInactive,
 } from '../queries/refreshToken';
-import { timeConstants } from '../constants';
 
 function processToken(token) {
   if (!token) return;
@@ -54,5 +54,8 @@ async function isTokenValid(id) {
 }
 
 export {
-  create, findById, markInactive, isTokenValid,
+  create,
+  findById,
+  markInactive,
+  isTokenValid,
 };

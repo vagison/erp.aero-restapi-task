@@ -1,5 +1,5 @@
-import { generateJWT, setAuthResponse } from '../utils/auth';
 import { RefreshTokenModel, UserModel } from '../models';
+import { generateJWT, setAuthResponse } from '../utils/auth';
 
 const signup = async (req, res) => {
   const userData = { ...req.body };

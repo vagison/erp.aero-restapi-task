@@ -1,4 +1,5 @@
 import jwt from 'jsonwebtoken';
+
 import { jwtConfig, refreshTokenConfig } from '../config';
 
 const generateJWT = (user) => jwt.sign(
@@ -18,4 +19,7 @@ const setAuthResponse = (res, bearerToken, refreshToken) => {
   res.setHeader('authorization', `Bearer ${bearerToken}`);
 };
 
-export { generateJWT, setAuthResponse };
+export {
+  generateJWT,
+  setAuthResponse,
+};

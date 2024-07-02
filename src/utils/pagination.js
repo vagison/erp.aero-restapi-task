@@ -17,4 +17,7 @@ const generatePaginatedRes = (data, { total, page, limit }) => {
   };
 };
 
-export { paginate, generatePaginatedRes };
+export {
+  paginate,
+  generatePaginatedRes,
+};

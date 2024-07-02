@@ -17,4 +17,6 @@ async function isBearerValid(req, res, next) {
   }
 }
 
-export { isBearerValid };
+export {
+  isBearerValid,
+};

@@ -7,12 +7,12 @@ import http from 'http';
 import consola from 'consola';
 
 // importing other stuff
-import { connectToDatabase } from './utils/db';
 import { corsConfig } from './config';
-import cookieParser from './middlewares/auth/cookie';
 import './config/passport';
-import { errorLogger, errorHandler, invalidPathHandler } from './middlewares';
 import indexRouter from './routes';
+import cookieParser from './middlewares/auth/cookie';
+import { errorLogger, errorHandler, invalidPathHandler } from './middlewares';
+import { connectToDatabase } from './utils/db';
 
 async function start() {
   await connectToDatabase();

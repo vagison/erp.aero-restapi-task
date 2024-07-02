@@ -3,5 +3,9 @@ import { errorLogger, errorHandler, invalidPathHandler } from './error';
 import requestValidator from './validator';
 
 export {
-  requestValidator, jwtMiddleware, errorLogger, errorHandler, invalidPathHandler,
+  jwtMiddleware,
+  errorLogger,
+  errorHandler,
+  invalidPathHandler,
+  requestValidator,
 };

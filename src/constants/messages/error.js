@@ -15,7 +15,7 @@ const constants = {
   },
   File: {
     NoFile: 'No file provided',
-    FileNotFound: 'File Not Found',
+    NotFound: 'File Not Found',
   },
 };
 

@@ -1,6 +1,5 @@
-import db from './db';
-import { findById } from '../queries/users';
 import { errorMessagesConstants } from '../constants';
+import { UserModel } from '../models';
 
 const signupValidatorSchema = {
   id: {
@@ -9,12 +8,9 @@ const signupValidatorSchema = {
     errorMessage: errorMessagesConstants.Auth.PhoneNumberOrEmailRequired,
     custom: {
       options: async (id) => {
-        const results = (await db().execute(findById(id)))[0];
-        const user = results[0];
+        const user = await UserModel.findById(id);
 
-        if (user) {
-          return Promise.reject(new Error(errorMessagesConstants.Auth.ExistingUser));
-        }
+        if (user) return Promise.reject(new Error(errorMessagesConstants.Auth.ExistingUser));
 
         return '';
       },

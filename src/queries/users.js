@@ -14,4 +14,8 @@ const createUser = (data) => `
   VALUES ('${data.id}', '${data.password}');
 `;
 
-export { createTable, findById, createUser };
+export {
+  createTable,
+  findById,
+  createUser,
+};

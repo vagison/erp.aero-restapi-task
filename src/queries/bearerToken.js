@@ -10,12 +10,12 @@ const createTable = () => `
 
 const findTokenById = (id) => `SELECT * FROM ${TABLE_NAME} WHERE id = '${id}' LIMIT 1`;
 
-const markTokensInactiveByRefreshTokenId = (id) => `UPDATE ${TABLE_NAME} SET active = 0 WHERE refresh_token = '${id}';`;
-
 const createToken = (data) => `
-  INSERT INTO ${TABLE_NAME} (id, refresh_token, active)
-  VALUES ('${data.bearerToken}', '${data.refreshToken}', 1);
+INSERT INTO ${TABLE_NAME} (id, refresh_token, active)
+VALUES ('${data.bearerToken}', '${data.refreshToken}', 1);
 `;
+
+const markTokensInactiveByRefreshTokenId = (id) => `UPDATE ${TABLE_NAME} SET active = 0 WHERE refresh_token = '${id}';`;
 
 export {
   createTable,

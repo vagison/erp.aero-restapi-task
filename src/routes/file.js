@@ -1,10 +1,10 @@
 import express from 'express';
 import multer from 'multer';
 
-import { fileController } from '../controllers';
 import { jwtMiddleware } from '../middlewares';
-import { addUploadFlag, checkFileExistence } from '../middlewares/file';
 import { isBearerValid } from '../middlewares/auth/bearer';
+import { addUploadFlag, checkFileExistence } from '../middlewares/file';
+import { fileController } from '../controllers';
 
 const fileRouter = express.Router();
 
